@@ -1,0 +1,32 @@
+#!/system/bin/sh
+REAL_SU=""
+for s in /data/adb/magisk/su /data/adb/ksu/bin/su /magisk/.core/bin/su /system/xbin/su.real /system/bin/su.real; do
+    if [ -f "$s" ] && [ "$s" != "$0" ]; then
+        REAL_SU="$s"
+        break
+    fi
+done
+
+if [ -z "$REAL_SU" ]; then
+    REAL_SU="sh"
+fi
+
+# Intercept AERO_TTY check string
+CMD_ARGS=""
+for arg in "$@"; do
+    case "$arg" in
+        *"</dev/tty >/dev/tty"*)
+            patched=$(echo "$arg" | sed 's|</dev/tty >/dev/tty|: true             |g')
+            CMD_ARGS="$CMD_ARGS "$patched""
+            ;;
+        *)
+            CMD_ARGS="$CMD_ARGS "$arg""
+            ;;
+    esac
+done
+
+if [ -n "$CMD_ARGS" ]; then
+    eval exec $REAL_SU $CMD_ARGS
+else
+    exec $REAL_SU "$@"
+fi

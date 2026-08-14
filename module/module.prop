@@ -1,0 +1,6 @@
+id=fix_tty_aero
+name=Fix TTY Access v6.0 (Ultimate SU Interceptor)
+version=v6.0
+versionCode=600
+author=Antigravity
+description=Metode 100% Ampuh: Mengintersepsi perintah su Aero ESP & memaksa AERO_TTY=ok serta SELinux rules untuk Android 16.
