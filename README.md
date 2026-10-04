@@ -1,3 +1,4 @@
+[![shellcheck](https://github.com/beduldul/android-pts-tty-fix/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/beduldul/android-pts-tty-fix/actions/workflows/shellcheck.yml)
 # Universal Android 15/16 Pseudo-Terminal (/dev/pts) & SELinux Permission Fixer
 
 Magisk & KernelSU module designed to resolve pseudo-terminal allocation failures (`/dev/pts/0` TTY unavailable) and SELinux denial rules on Android 15 & 16 (AOSP & Custom ROMs).
