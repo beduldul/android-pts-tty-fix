@@ -17,15 +17,16 @@ for arg in "$@"; do
     case "$arg" in
         *"</dev/tty >/dev/tty"*)
             patched=$(echo "$arg" | sed 's|</dev/tty >/dev/tty|: true             |g')
-            CMD_ARGS="$CMD_ARGS "$patched""
+            CMD_ARGS="$CMD_ARGS \"$patched\""
             ;;
         *)
-            CMD_ARGS="$CMD_ARGS "$arg""
+            CMD_ARGS="$CMD_ARGS \"$arg\""
             ;;
     esac
 done
 
 if [ -n "$CMD_ARGS" ]; then
+    # shellcheck disable=SC2086  # eval intentionally word-splits CMD_ARGS into argv
     eval exec $REAL_SU $CMD_ARGS
 else
     exec $REAL_SU "$@"
